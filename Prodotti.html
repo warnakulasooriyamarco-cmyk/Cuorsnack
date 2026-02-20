@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Prodotti - Cuor Snack</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --primary: #ff4d6d;
+  --secondary: #ffb347;
+  --accent: #6bcf8e;
+  --dark: #1e1e2f;
+  --glass: rgba(255,255,255,0.15);
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+  font-family:'Poppins',sans-serif;
+  background: linear-gradient(-45deg,#ff4d6d,#ffb347,#6bcf8e,#4facfe);
+  background-size:400% 400%;
+  animation: gradientBG 12s ease infinite;
+  color:white;
+}
+
+@keyframes gradientBG {
+  0% {background-position:0% 50%;}
+  50% {background-position:100% 50%;}
+  100% {background-position:0% 50%;}
+}
+
+/* NAV */
+header.nav {
+  backdrop-filter: blur(20px);
+  background: rgba(255,255,255,0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo-small { height: 50px; transition: 0.4s; }
+.logo-small:hover { transform: rotate(8deg) scale(1.1); }
+
+.menu-btn {
+  background: linear-gradient(45deg,var(--primary),var(--secondary));
+  border: none;
+  padding: 10px 20px;
+  border-radius: 50px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.menu-btn:hover {
+  transform: scale(1.1);
+}
+
+nav { 
+  display: flex; 
+  gap: 15px; 
+  overflow: hidden; 
+  max-height: 0; 
+  transition: max-height 0.4s ease; 
+}
+
+nav a button {
+  background: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 50px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.3s;
+}
+nav a button:hover { 
+  background: var(--accent); 
+  color: white; 
+  transform: translateY(-3px);
+}
+
+/* SEARCH */
+.search-container {
+  padding: 30px;
+  text-align: center;
+}
+
+#searchInput {
+  padding: 14px 25px;
+  width: 320px;
+  border-radius: 50px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+}
+
+/* PRODUCTS */
+#productsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  padding: 40px;
+}
+
+.product-box {
+  width: 230px;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(20px);
+  border-radius: 25px;
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.4s;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+  position: relative;
+  overflow: hidden;
+}
+
+.product-box::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(120deg,transparent,rgba(255,255,255,0.4),transparent);
+  transform:translateX(-100%);
+  transition:0.6s;
+}
+
+.product-box:hover::before{
+  transform:translateX(100%);
+}
+
+.product-box:hover {
+  transform: translateY(-10px) scale(1.07);
+}
+
+.product-box img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 20px;
+  transition: 0.4s;
+}
+
+.product-box:hover img{
+  transform: scale(1.1);
+}
+
+.product-box h3 {
+  margin-top: 15px;
+  font-size: 18px;
+  font-weight: 600;
+}
+</style>
+</head>
+
+<body>
+
+<header class="nav">
+  <button class="menu-btn" onclick="toggleMenu()">☰ Menu</button>
+  <nav id="menu">
+    <a href="Cuorsnack.html"><button>Home</button></a>
+    <a href="chi-siamo.html"><button>Chi siamo</button></a>
+    <a href="prodotti.html"><button>Prodotti</button></a>
+    <a href="#"><button>Contatti</button></a>
+  </nav>
+  <img src="Cuorsnack.png" alt="Logo Cuor Snack" class="logo-small" />
+</header>
+
+<div class="search-container">
+  <input type="text" id="searchInput" placeholder="Cerca prodotto" />
+</div>
+
+<div id="productsContainer"></div>
+
+<script>
+function toggleMenu() {
+  const menu = document.getElementById("menu");
+  if (menu.style.maxHeight && menu.style.maxHeight !== "0px") {
+    menu.style.maxHeight = "0";
+  } else {
+    menu.style.maxHeight = menu.scrollHeight + "px";
+  }
+}
+
+const container = document.getElementById('productsContainer');
+
+const products = [
+  { name: "Prodotto 1", img: "img1.jpg" },
+  { name: "Prodotto 2", img: "img2.jpg" },
+  { name: "Prodotto 3", img: "img3.jpg" },
+  { name: "Prodotto 4", img: "img4.jpg" },
+  { name: "Prodotto 5", img: "img5.jpg" },
+  { name: "Prodotto 6", img: "img6.jpg" },
+  { name: "Prodotto 7", img: "img7.jpg" },
+  { name: "Prodotto 8", img: "img8.jpg" },
+  { name: "Prodotto 9", img: "img9.jpg" },
+  { name: "Prodotto 10", img: "img10.jpg" },
+  { name: "Prodotto 11", img: "img11.jpg" },
+  { name: "Prodotto 12", img: "img12.jpg" },
+  { name: "Prodotto 13", img: "img13.jpg" },
+  { name: "Prodotto 14", img: "img14.jpg" },
+  { name: "Marco", img: "marco.jpg" }
+];
+
+function createProductBox(product) {
+  const box = document.createElement('div');
+  box.classList.add('product-box');
+  box.setAttribute('data-name', product.name);
+
+  box.innerHTML = `
+    <img src="${product.img}" alt="${product.name}">
+    <h3>${product.name}</h3>
+  `;
+
+  box.onclick = () => {
+    window.location.href = 
+    `prodotto.html?name=${encodeURIComponent(product.name)}&img=${encodeURIComponent(product.img)}`;
+  };
+
+  container.appendChild(box);
+}
+
+products.forEach(product => createProductBox(product));
+
+document.getElementById('searchInput')
+.addEventListener('input', function(){
+  const query = this.value.toLowerCase();
+  const boxes = document.querySelectorAll('.product-box');
+  boxes.forEach(box => {
+    const name = box.getAttribute('data-name').toLowerCase();
+    box.style.display = name.includes(query) ? 'block' : 'none';
+  });
+});
+</script>
+
+</body>
+</html>
